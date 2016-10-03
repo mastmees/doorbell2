@@ -127,6 +127,10 @@ void start_playback()
     enable_playback();
     disable_button();
   }
+  else
+  {
+    disable_playback();
+  }
 }
 
 
@@ -236,6 +240,8 @@ int main(void)
   PORTD=0xff;
   PORTB=0x3f;
   //
+  while ((PINC&4)==0) // wait for INT0 input to go high
+    ;
   EICRA=2; // falling edge on INT0 interrupts
   enable_button(); // enable INT0 interrupts
   //
